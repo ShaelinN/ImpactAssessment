@@ -29,12 +29,12 @@ import impactassessment.numberrangesummarizer.exception.InvalidInputStringExcept
  * it is okay if it detects the problem and passes the information on to the caller.
  * 
  * 2. Nulls should not be caught at this level, as they indicate a systemic problem,
- * which should be handled at a higher level
+ * which should be handled at a higher level. This class is designed to break down if it encounters a null
  * 3. An integer consists only of the following symbols:
  *      '-', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'
  *      i.e. floats that are equivalent to ints (like 3.0) are invalid, 
  *      as are scientific notation ints like '2e3'/ '2E3' / '2x10^3'
- * 5. integers provided are in base ten
+ * 4. integers provided are in base ten
  */
 public class InputValidatingNumberRangeSummarizerTest {
 
@@ -91,6 +91,12 @@ public class InputValidatingNumberRangeSummarizerTest {
         assertEquals("", result);
     }
 
+    /**
+     * This test covers the validateCollection method, since that
+     * is the method that causes the exception to be thrown.
+     * In this case, the underlying BasicNumberRangeSummarizer.summarizeCollection
+     * method will not even be called.
+     */
     @Test
     void summarizeCollectionInvalidTest() {
         List<Collection<Integer>> inputs = new ArrayList<>();
@@ -110,6 +116,5 @@ public class InputValidatingNumberRangeSummarizerTest {
                 }
             );
         }
-
     }
 }

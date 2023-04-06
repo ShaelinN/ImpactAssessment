@@ -61,6 +61,7 @@ public class InputValidatingNumberRangeSummarizer implements NumberRangeSummariz
         try {
             inputValidator.validateString(input);
         } catch (InvalidInputStringException e) {
+            // if logging was implemented, it would be used here
             throw e;
         }
         return innerNumberRangerSummarizer.collect(input);
@@ -74,10 +75,16 @@ public class InputValidatingNumberRangeSummarizer implements NumberRangeSummariz
     @Override
     public String summarizeCollection(Collection<Integer> input) {
         try {
-            inputValidator.validateCollection(input);
+            validateCollection(input);
         } catch (InvalidCollectionException e) {
+            // if logging was implemented, it would be used here
             throw e;
         }
         return innerNumberRangerSummarizer.summarizeCollection(input);
+    }
+
+    // for ease of testing
+    public void validateCollection(Collection<Integer> input) {
+        inputValidator.validateCollection(input);
     }
 }

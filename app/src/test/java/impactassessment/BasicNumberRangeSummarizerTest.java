@@ -30,7 +30,7 @@ import impactassessment.numberrangesummarizer.element.SingleNumberElement;
  * 1. Empty input is valid and must result ultimately in empty output ("" -> <empty collection> -> "")
  * 2. Negative or positive integers are allowed
  * 3. Nulls should not be caught at this level, as they indicate a systemic problem,
- * which should be handled at a higher level
+ * which should be handled at a higher level. This class is designed to break down if it encounters a null
  * 4. a integer consists only of the following symbols:
  *      '-', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'
  *      i.e. floats that are equivalent to ints (like 3.0) are invalid, 

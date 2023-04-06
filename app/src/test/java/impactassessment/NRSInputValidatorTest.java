@@ -15,7 +15,15 @@ import impactassessment.numberrangesummarizer.inputvalidation.NRSInputValidator;
  * (e.g. InputValidatingNumberRangeSummarizer tests it's own validateCollection behaviour)
  * 
  * 2. Nulls should not be caught at this level, as they indicate a systemic problem,
- * which should be handled at a higher level
+ * which should be handled at a higher level. This class is designed to break down if it encounters a null
+ * 
+* 3. An integer consists only of the following symbols:
+ *      '-', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'
+ *      i.e. floats that are equivalent to ints (like 3.0) are invalid, 
+ *      as are scientific notation ints like '2e3'/ '2E3' / '2x10^3'
+ * 4. integers provided are in base ten
+ * 
+ * 3. spaces in the input string are not allowed
  */
 public class NRSInputValidatorTest {
     NRSInputValidator defaultImplementation;
