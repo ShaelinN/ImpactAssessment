@@ -59,7 +59,6 @@ public class BasicNumberRangeSummarizerTest {
     void collectEmptyOrMalformedInputTest() {
 
         String[] inputs = new String[] {
-            "",
             "1-3,4,5", 
             "a", 
             "1,2,3,a", 
@@ -87,12 +86,14 @@ public class BasicNumberRangeSummarizerTest {
         Collection<Integer> resultTrailingComma = summarizer.collect("1,");
         Collection<Integer> resultNegativeIncluded = summarizer.collect("1,-1,2,-5");
         Collection<Integer> resultWithRepetition = summarizer.collect("1,1,1,2,2,3");
+        Collection<Integer> resultEmpty = summarizer.collect("");
 
         // ensuring treesets ensures order and uniqueness
         assertEquals(TreeSet.class, resultTrivial.getClass());
         assertEquals(TreeSet.class, resultTrailingComma.getClass());
         assertEquals(TreeSet.class, resultNegativeIncluded.getClass());
         assertEquals(TreeSet.class, resultWithRepetition.getClass());
+        assertEquals(TreeSet.class, resultEmpty.getClass());
         
         assertEquals(3, resultTrivial.size());
         assertTrue(resultTrivial.contains(1));
@@ -109,10 +110,12 @@ public class BasicNumberRangeSummarizerTest {
         assertTrue(resultNegativeIncluded.contains(2));
 
         assertEquals(3, resultWithRepetition.size());
-        assertTrue(resultTrivial.contains(1));
-        assertTrue(resultTrivial.contains(2));
-        assertTrue(resultTrivial.contains(3));
+        assertTrue(resultWithRepetition.contains(1));
+        assertTrue(resultWithRepetition.contains(2));
+        assertTrue(resultWithRepetition.contains(3));
 
+        assertEquals(0, resultEmpty.size());
+        assertTrue(resultEmpty.isEmpty());
     }
 
     @Test 

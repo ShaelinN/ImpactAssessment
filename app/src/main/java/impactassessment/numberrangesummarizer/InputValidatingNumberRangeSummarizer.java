@@ -2,7 +2,8 @@ package impactassessment.numberrangesummarizer;
 
 import java.util.Collection;
 
-import impactassessment.numberrangesummarizer.exception.InvalidInputException;
+import impactassessment.numberrangesummarizer.exception.InvalidCollectionException;
+import impactassessment.numberrangesummarizer.exception.InvalidInputStringException;
 import impactassessment.numberrangesummarizer.inputvalidation.NRSInputValidator;
 
 /**
@@ -11,21 +12,21 @@ import impactassessment.numberrangesummarizer.inputvalidation.NRSInputValidator;
  * This allows the caller to implement behaviour to counter invalid inputs in any way they see fit
  */
 public class InputValidatingNumberRangeSummarizer implements NumberRangeSummarizer {
-    BasicNumberRangerSummarizer innerNumberRangerSummarizer = new BasicNumberRangerSummarizer();
+    private final BasicNumberRangerSummarizer innerNumberRangerSummarizer = new BasicNumberRangerSummarizer();
     
     /*
     * By default, construct this summarizer with the default input validation rules,
     * (non-null, non-empty, string with only numeric characters and commas)
     */
-    NRSInputValidator inputValidator = new NRSInputValidator() {
-        // uses default validate() behaviour;
-    };
+    private NRSInputValidator inputValidator;
 
     /**
      * Use this constructor to use default validator.
      */
     public InputValidatingNumberRangeSummarizer() {
-        // blank body because the validator is already initialised to the default value;
+        inputValidator = new NRSInputValidator() {
+            // uses default validation behaviour;
+        };
     }
 
     /**
@@ -40,8 +41,8 @@ public class InputValidatingNumberRangeSummarizer implements NumberRangeSummariz
     @Override
     public Collection<Integer> collect(String input) {
         try {
-            inputValidator.validate(input);
-        } catch (InvalidInputException e) {
+            inputValidator.validateString(input);
+        } catch (InvalidInputStringException e) {
             throw e;
         }
         return innerNumberRangerSummarizer.collect(input);
@@ -49,6 +50,11 @@ public class InputValidatingNumberRangeSummarizer implements NumberRangeSummariz
 
     @Override
     public String summarizeCollection(Collection<Integer> input) {
+        try {
+            inputValidator.validateCollection(input);
+        } catch (InvalidCollectionException e) {
+            throw e;
+        }
         return innerNumberRangerSummarizer.summarizeCollection(input);
     }
 }

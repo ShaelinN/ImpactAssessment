@@ -1,12 +1,13 @@
 package impactassessment;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import impactassessment.numberrangesummarizer.exception.InvalidInputException;
+import impactassessment.numberrangesummarizer.exception.InvalidInputStringException;
 import impactassessment.numberrangesummarizer.inputvalidation.NRSInputValidator;
 
 public class NRSInputValidatorTest {
@@ -20,35 +21,27 @@ public class NRSInputValidatorTest {
     }
 
     @Test
-    void validateSuccessfulTest() {
-        assertTrue(defaultImplementation.validate("1"));
-        assertTrue(defaultImplementation.validate("1,2"));
-        assertTrue(defaultImplementation.validate("10,2"));
-        assertTrue(defaultImplementation.validate("1,-2"));
-        assertTrue(defaultImplementation.validate("-10,2"));
+    void validateStringSuccessfulTest() {
+        assertTrue(defaultImplementation.validateString("1"));
+        assertTrue(defaultImplementation.validateString("1,2"));
+        assertTrue(defaultImplementation.validateString("10,2"));
+        assertTrue(defaultImplementation.validateString("1,-2"));
+        assertTrue(defaultImplementation.validateString("-10,2"));
+        assertTrue(defaultImplementation.validateString(""));
         
     }
 
     @Test
-    void validateNullInputTest() {
+    void validateStringNullInputTest() {
         assertThrows(
-            InvalidInputException.class, () -> { 
-                defaultImplementation.validate(null);
+            InvalidInputStringException.class, () -> { 
+                defaultImplementation.validateString(null);
             }
         );
     }
 
     @Test
-    void validateEmptyInputTest() {
-        assertThrows(
-            InvalidInputException.class, () -> { 
-                defaultImplementation.validate("");
-            }
-        );
-    }
-
-    @Test
-    void validateMalformedTest() {
+    void validateStringMalformedTest() {
         String[] inputs = new String[] {
             "1-3,4,5", 
             "a", 
@@ -63,11 +56,11 @@ public class NRSInputValidatorTest {
             String input = inputs[i];
 
             assertThrows(
-                InvalidInputException.class, () -> { 
-                    defaultImplementation.validate(input);
+                InvalidInputStringException.class, () -> { 
+                    defaultImplementation.validateString(input);
                 }
             );
         }
 
-    }
+    }    
 }

@@ -23,12 +23,16 @@ public class BasicNumberRangerSummarizer implements NumberRangeSummarizer {
         Collection<Integer> result = new TreeSet<>();
 
         String[] split = input.split(",");
-        for (String string : split) {
-            int element = Integer.parseInt(string);
-            result.add(element);
+        if (split.length == 1 && split[0].length() == 0) { // only one split element, the empty string
+            // return the empty set
+            return result;
+        } else {
+            for (String string : split) {
+                int element = Integer.parseInt(string);
+                result.add(element);
+            }
+            return result;
         }
-
-        return result;
     }
 
     /**
