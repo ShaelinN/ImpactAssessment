@@ -43,8 +43,12 @@ public class BasicNumberRangerSummarizer implements NumberRangeSummarizer {
      */
     @Override
     public String summarizeCollection(Collection<Integer> input) {
+        if (input.size() == 0) {
+            return "";
+        }
+        
         // enforce TreeSet, since that is what is being provided by collect, and required by performGrouping.
-        List<NumberRangeSummarizerElement> grouped = performGrouping((TreeSet) input);
+        List<NumberRangeSummarizerElement> grouped = performGrouping((TreeSet<Integer>) input);
         String result = grouped.stream()
                         .map(NumberRangeSummarizerElement::toString)
                         .collect(Collectors.joining(","));
