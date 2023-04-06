@@ -25,4 +25,14 @@ public class MultiNumberRangeElement implements NumberRangeSummarizerElement {
                             .toString();        
         return result;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o.getClass() != MultiNumberRangeElement.class) {
+            return false;
+        } else {
+            return (this.start == ((MultiNumberRangeElement)o).start) 
+            && (this.end == ((MultiNumberRangeElement)o).end);
+        }
+    }
 }

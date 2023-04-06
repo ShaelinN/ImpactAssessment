@@ -1,9 +1,7 @@
-package impactassessment;
+package impactassessment.numberrangesummarizer;
 
 import java.util.Collection;
 
-import impactassessment.numberrangesummarizer.NumberRangeSummarizer;
-import impactassessment.numberrangesummarizer.BasicNumberRangerSummarizer;
 import impactassessment.numberrangesummarizer.exception.InvalidInputException;
 import impactassessment.numberrangesummarizer.inputvalidation.NRSInputValidator;
 

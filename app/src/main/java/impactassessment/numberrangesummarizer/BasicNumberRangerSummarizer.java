@@ -39,22 +39,23 @@ public class BasicNumberRangerSummarizer implements NumberRangeSummarizer {
      */
     @Override
     public String summarizeCollection(Collection<Integer> input) {
-        List<NumberRangeSummarizerElement> grouped = performGrouping(input);
+        // enforce TreeSet, since that is what is being provided by collect, and required by performGrouping.
+        List<NumberRangeSummarizerElement> grouped = performGrouping((TreeSet) input);
         String result = grouped.stream()
                         .map(NumberRangeSummarizerElement::toString)
                         .collect(Collectors.joining(","));
         return result;
     }
 
-
     /**
      * Convert input to a List to simplify iteration.
+     * Force input to be a TreeSet type specifically
      * Wrap the integers in the type NumberRangeSummarizerElement
      * which can represent either a single number or a range.
      * @param input Collection of Integers (ordered and unique)
      * @return List of NumberRangeSummarizerElements.
      */
-    List<NumberRangeSummarizerElement> performGrouping(Collection<Integer> input) {
+    public List<NumberRangeSummarizerElement> performGrouping(TreeSet<Integer> input) {
         List<Integer> asList = new ArrayList<>(input);
 
         List<NumberRangeSummarizerElement> result = new ArrayList<>();
@@ -102,7 +103,7 @@ public class BasicNumberRangerSummarizer implements NumberRangeSummarizer {
      * @param consecutiveRange a list of consecutive numbers with at least 1 element.
      * @return a NumberRangeSummarizerElement which can be either a single number or a range.
      */
-    NumberRangeSummarizerElement fromIntegerList(List<Integer> consecutiveRange) {
+    public NumberRangeSummarizerElement fromIntegerList(List<Integer> consecutiveRange) {
         NumberRangeSummarizerElement element;
                 if (consecutiveRange.size() == 1) {
                     int value = consecutiveRange.get(0);
@@ -114,6 +115,5 @@ public class BasicNumberRangerSummarizer implements NumberRangeSummarizer {
                 }
                 return element;
     }
-
 
 }

@@ -18,4 +18,13 @@ public class SingleNumberElement implements NumberRangeSummarizerElement {
     public String toString() {
         return Integer.toString(value);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o.getClass() != SingleNumberElement.class) {
+            return false;
+        } else {
+            return this.value == ((SingleNumberElement)o).value;
+        }
+    }
 }
