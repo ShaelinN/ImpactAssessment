@@ -9,6 +9,14 @@ import org.junit.jupiter.api.Test;
 import impactassessment.numberrangesummarizer.exception.InvalidInputStringException;
 import impactassessment.numberrangesummarizer.inputvalidation.NRSInputValidator;
 
+/**
+ * Assumption:
+ * 1. custom implementations are tested where they are defined
+ * (e.g. InputValidatingNumberRangeSummarizer tests it's own validateCollection behaviour)
+ * 
+ * 2. Nulls should not be caught at this level, as they indicate a systemic problem,
+ * which should be handled at a higher level
+ */
 public class NRSInputValidatorTest {
     NRSInputValidator defaultImplementation;
 
@@ -33,7 +41,7 @@ public class NRSInputValidatorTest {
     @Test
     void validateStringNullInputTest() {
         assertThrows(
-            InvalidInputStringException.class, () -> { 
+            NullPointerException.class, () -> { 
                 defaultImplementation.validateString(null);
             }
         );

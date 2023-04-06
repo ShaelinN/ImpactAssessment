@@ -113,15 +113,15 @@ public class BasicNumberRangerSummarizer implements NumberRangeSummarizer {
      */
     public NumberRangeSummarizerElement fromIntegerList(List<Integer> consecutiveRange) {
         NumberRangeSummarizerElement element;
-                if (consecutiveRange.size() == 1) {
-                    int value = consecutiveRange.get(0);
-                    element = new SingleNumberElement(value);
-                } else {
-                    int start = consecutiveRange.get(0);
-                    int end = consecutiveRange.get(consecutiveRange.size() - 1);
-                    element = new MultiNumberRangeElement(start, end);
-                }
-                return element;
+        if (consecutiveRange.size() == 1) {
+            int value = consecutiveRange.get(0);
+            element = new SingleNumberElement(value);
+        } else {
+            int start = consecutiveRange.get(0);
+            int end = consecutiveRange.get(consecutiveRange.size() - 1);
+            element = new MultiNumberRangeElement(start, end);
+        }
+        return element;
     }
 
 }

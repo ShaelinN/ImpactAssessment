@@ -24,7 +24,18 @@ import impactassessment.numberrangesummarizer.element.SingleNumberElement;
  * 
  * It is intended to break down if it receives invalid inputs.
  * 
- * Wrapper classes must exist to provide input validation and handle invalid inputs.
+ * A wrapper class exists to provide input validation (see InputValidatingNumberRangeSummarizer).
+ * 
+ * Assumptions:
+ * 1. Empty input is valid and must result ultimately in empty output ("" -> <empty collection> -> "")
+ * 2. Negative or positive integers are allowed
+ * 3. Nulls should not be caught at this level, as they indicate a systemic problem,
+ * which should be handled at a higher level
+ * 4. a integer consists only of the following symbols:
+ *      '-', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'
+ *      i.e. floats that are equivalent to ints (like 3.0) are invalid, 
+ *      as are scientific notation ints like '2e3'/ '2E3' / '2x10^3'
+ * 5. integers provided are in base ten
  */
 public class BasicNumberRangeSummarizerTest {
 
@@ -54,6 +65,8 @@ public class BasicNumberRangeSummarizerTest {
      * -leading comma,
      * -consecutive commas,
      * -non-numeric characters other than comma (including scientific notation and float notation of integers)
+     * 
+     * trailing commas will be blocked by InputValidatingNumberRangeSummarizer
      */
     @Test
     void collectEmptyOrMalformedInputTest() {
