@@ -16,7 +16,7 @@ public interface NRSInputValidator {
             reason = "Input string is null";
         } else if (input.equals("")) {
             reason = "Input string is empty";
-        } else if (!input.matches("^[0-9](,[0-9]+)*")) {
+        } else if (!input.matches("^-?\\d+(,-?\\d++)*")) {
             reason = "Input string non-numeric characters or is otherwise malformed";
         }
 

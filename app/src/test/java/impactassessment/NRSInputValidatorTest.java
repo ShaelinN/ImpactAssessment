@@ -23,6 +23,10 @@ public class NRSInputValidatorTest {
     void validateSuccessfulTest() {
         assertTrue(defaultImplementation.validate("1"));
         assertTrue(defaultImplementation.validate("1,2"));
+        assertTrue(defaultImplementation.validate("10,2"));
+        assertTrue(defaultImplementation.validate("1,-2"));
+        assertTrue(defaultImplementation.validate("-10,2"));
+        
     }
 
     @Test
@@ -54,6 +58,7 @@ public class NRSInputValidatorTest {
             "1,",
             "1,,2",
         };
+        
         for (int i = 0; i < inputs.length; i++) {
             String input = inputs[i];
 
