@@ -36,6 +36,10 @@ import impactassessment.numberrangesummarizer.element.SingleNumberElement;
  *      i.e. floats that are equivalent to ints (like 3.0) are invalid, 
  *      as are scientific notation ints like '2e3'/ '2E3' / '2x10^3'
  * 5. integers provided are in base ten
+ * 6. repetition is allowed in input, but the output must only contain unique numbers.
+ *      (e.g. both 1,1,1,2,4,6 and 1,2,4,6 are valid input, resulting in 1-2,4,6 as output)
+ * 7. order does not matter in input, but does in output 
+ *      (e.g. both 1,2,4,6 and 1,2,6,4 are valid input, resulting in 1-2,4,6 as output)
  */
 public class BasicNumberRangeSummarizerTest {
 
